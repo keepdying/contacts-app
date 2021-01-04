@@ -98,36 +98,44 @@ void saveDb(int i){
 		fclose(f);
 }
 
-void readDb(){
+void readDb()
+{
 		FILE *f = fopen("database.txt", "r");
 		if (f == NULL) 
 		{
 			printf("Database yok. Olusturulmasi icin rehbere kisi ekleyin.\n");
 		}
-		int a = 0;
-		timer= 0;
-		while(fread(&entry1, sizeof(struct entry), 1, f)){
+		else
+		{
+			int a = 0;
+			timer= 0;
 		
-			entriesArray[a].id = entry1.id;
-			strcpy(entriesArray[a].name,entry1.name);
-			strcpy(entriesArray[a].mail,entry1.mail);
-			strcpy(entriesArray[a].phone,entry1.phone);
-			entriesArray[a].time = entry1.time;
-			/*entriesArray[a].name = entry1.name;
-			entriesArray[a].mail = entry1.mail;
-			entriesArray[a].phone = entry1.phone;*/
+			while(fread(&entry1, sizeof(struct entry), 1, f))
+			{
+		
+				entriesArray[a].id = entry1.id;
+				strcpy(entriesArray[a].name,entry1.name);
+				strcpy(entriesArray[a].mail,entry1.mail);
+				strcpy(entriesArray[a].phone,entry1.phone);
+				entriesArray[a].time = entry1.time;
+				/*entriesArray[a].name = entry1.name;
+				entriesArray[a].mail = entry1.mail;
+				entriesArray[a].phone = entry1.phone;*/
 			
-			sortedArray[a].id = entry1.id;
-			strcpy(sortedArray[a].name,entry1.name);
-			strcpy(sortedArray[a].mail,entry1.mail);
-			strcpy(sortedArray[a].phone,entry1.phone);
-			sortedArray[a].time = entry1.time;
+				sortedArray[a].id = entry1.id;
+				strcpy(sortedArray[a].name,entry1.name);
+				strcpy(sortedArray[a].mail,entry1.mail);
+				strcpy(sortedArray[a].phone,entry1.phone);
+				sortedArray[a].time = entry1.time;
 			
-			a++;
-			timer++;
+				a++;
+				timer++;
+			}
+			fclose(f);
 		}
 		
-		fclose(f);
+		
+		
 }
 
 void addEntry() 
