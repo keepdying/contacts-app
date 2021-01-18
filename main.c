@@ -50,7 +50,8 @@ void menuFunc() {
 	printf("2- Delete Entry\n");
 	printf("3- Edit Entry\n");
 	printf("4- Time Sorted List Entries\n");
-	printf("5- Alphabetic Sorted List Entries\n\n");
+	printf("5- Alphabetic Sorted List Entries\n");
+	printf("6- Search Entry\n\n");
 
 	//choice = getchar()-'0';
 	printf("Your choice: ");
@@ -72,6 +73,9 @@ void menuFunc() {
 		break;
 	case 5:
 		sortedListMenu();
+		break;
+	case 6:
+		searchEntry();
 		break;
 	default:
 		menuFunc();
@@ -178,7 +182,6 @@ void deleteEntry(){
 	menuFunc();
 }
 
-
 void saveDb(int i){
 		FILE *f = fopen("database.txt", "a+");
 		if (f == NULL) 
@@ -196,6 +199,22 @@ void updateDb(int i){
 	fclose(f);
 }
 
+void searchEntry() {
+	char to_search[50];
+	printf("name? (write n to skip):\n");
+	getchar();
+	gets(to_search);
+	printf("\n");
+	for (int i = 0; i < 999; i++) {
+		if (strcmp(entriesArray[i].name, to_search) == 0) {
+			printf("%d\n" ,entriesArray[i].id);
+			printf("%s\n", entriesArray[i].name);
+			printf("%s\n", entriesArray[i].phone);
+			printf("%s\n", entriesArray[i].mail);
+			}
+		}
+	menuFunc();
+	}
 
 void allDbUpdate(){
 	FILE *f = fopen("database.txt", "w+");
