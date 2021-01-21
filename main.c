@@ -45,21 +45,53 @@ int main(void) {
 
 void menuFunc() {
 
-	int choice = 0;
+	char choice;;
 	printf("\n1- Add Entry\n");
 	printf("2- Delete Entry\n");
 	printf("3- Edit Entry\n");
 	printf("4- Time Sorted List Entries\n");
 	printf("5- Alphabetic Sorted List Entries\n");
-	printf("6- Search Entry\n\n");
+	printf("6- Search Entry\n");
+	printf("Q- Exit program\n\n");
 
-	//choice = getchar()-'0';
-	printf("Your choice: ");
-	scanf("%d", &choice);
-
+	scanf(" %c", &choice);
+	if (choice == 49)
+	{
+		addEntry();
+	}
+	else if (choice == 50)
+	{
+		deleteEntry();
+	}
+	else if (choice == 51)
+	{
+		editEntry();
+	}
+	else if (choice == 52)
+	{
+		listEntriesMenu();
+	}
+	else if (choice == 53)
+	{
+		sortedListMenu();
+	}
+	else if (choice == 54)
+	{
+		searchEntry();
+	}
+	else if (choice == 81 || choice == 113) // Q or q
+	{
+		printf("See you later!");
+		return 0;
+	}
+	else /* default: */
+	{
+		menuFunc();
+	}
+	/*
 	switch (choice)
 	{
-	case 1:
+	case :
 		addEntry();
 		break;
 	case 2:
@@ -80,7 +112,9 @@ void menuFunc() {
 	default:
 		menuFunc();
 		break;
+		
 	}
+	*/
 }
 
 void editEntry()
@@ -200,19 +234,53 @@ void updateDb(int i){
 }
 
 void searchEntry() {
+	int searchChoice;
+	printf("1- Name\n");
+	printf("2- Mail\n");
+	printf("3- Phone\n");
+
+	printf("Search by: ");
+	scanf("%d", &searchChoice);
+	printf("Input: ");
 	char to_search[50];
-	printf("name? (write n to skip):\n");
 	getchar();
 	gets(to_search);
 	printf("\n");
-	for (int i = 0; i < 999; i++) {
-		if (strcmp(entriesArray[i].name, to_search) == 0) {
-			printf("%d\n" ,entriesArray[i].id);
-			printf("%s\n", entriesArray[i].name);
-			printf("%s\n", entriesArray[i].phone);
-			printf("%s\n", entriesArray[i].mail);
+	if(searchChoice == 1) {
+		to_search[0] = toupper(to_search[0]);
+		for (int i = 0; i < 999; i++) {
+			if (strcmp(entriesArray[i].name, to_search) == 0) {
+				printf("%d\n" ,entriesArray[i].id);
+				printf("%s\n", entriesArray[i].name);
+				printf("%s\n", entriesArray[i].phone);
+				printf("%s\n", entriesArray[i].mail);
+				}
+			}
+	}
+	else if (searchChoice == 2) {
+		for (int i = 0; i < 999; i++) {
+			if (strcmp(entriesArray[i].mail, to_search) == 0) {
+				printf("%d\n", entriesArray[i].id);
+				printf("%s\n", entriesArray[i].name);
+				printf("%s\n", entriesArray[i].phone);
+				printf("%s\n", entriesArray[i].mail);
 			}
 		}
+	}
+	else if (searchChoice == 3) {
+		for (int i = 0; i < 999; i++) {
+			if (strcmp(entriesArray[i].phone, to_search) == 0) {
+				printf("%d\n", entriesArray[i].id);
+				printf("%s\n", entriesArray[i].name);
+				printf("%s\n", entriesArray[i].phone);
+				printf("%s\n", entriesArray[i].mail);
+			}
+		}
+	}
+	else {
+		printf("no valid input given in search by. returning...\n");
+	}
+	
 	menuFunc();
 	}
 
